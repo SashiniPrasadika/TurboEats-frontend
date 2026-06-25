@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, List } from '@mui/material';
+import { Box, List, Typography } from '@mui/material';
 import NavGroup from './NavGroup';
 import menuItem from 'menu-items';
 
@@ -9,6 +9,7 @@ const Navigation = () => {
   const [selectedID, setSelectedID] = useState('default');
 
   const navGroups = menuItem.items.map((item) => {
+    // Check if item has children (it's a group)
     if (item.children) {
       return (
         <NavGroup 
@@ -19,7 +20,18 @@ const Navigation = () => {
         />
       );
     }
-    return null;
+    
+    // If it's a single item without children
+    return (
+      <List key={item.id} sx={{ py: 0 }}>
+        <NavItem 
+          item={item} 
+          level={1} 
+          setSelectedID={setSelectedID} 
+          isParents={true}
+        />
+      </List>
+    );
   });
 
   return (

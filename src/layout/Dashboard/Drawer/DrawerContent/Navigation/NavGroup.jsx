@@ -1,36 +1,29 @@
 import PropTypes from 'prop-types';
-// material-ui
 import List from '@mui/material/List';
-//import Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
-// project import
 import NavItem from './NavItem';
 import { useGetMenuMaster } from 'api/menu';
 
 // ==============================|| NAVIGATION - LIST GROUP ||============================== //
 
-export default function NavGroup({ item }) {
+export default function NavGroup({ item, setSelectedID, selectedID }) {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
   const navCollapse = item.children?.map((menuItem) => {
-    switch (menuItem.type) {
-      case 'collapse':
-        return (
-          <Typography key={menuItem.id} variant="caption" color="error" sx={{ p: 2.5 }}>
-            collapse - only available in paid version
-          </Typography>
-        );
-      case 'item':
-        return <NavItem key={menuItem.id} item={menuItem} level={1} />;
-      default:
-        return (
-          <Typography key={menuItem.id} variant="h6" color="error" align="center">
-            Fix - Group Collapse or Items
-          </Typography>
-        );
+    if (menuItem.type === 'item') {
+      return (
+        <NavItem 
+          key={menuItem.id} 
+          item={menuItem} 
+          level={1} 
+          setSelectedID={setSelectedID}
+          isParents={true}
+        />
+      );
     }
+    return null;
   });
 
   return (
@@ -42,7 +35,6 @@ export default function NavGroup({ item }) {
             <Typography variant="subtitle2" color="textSecondary">
               {item.title}
             </Typography>
-            {/* only available in paid version */}
           </Box>
         )
       }
@@ -53,4 +45,8 @@ export default function NavGroup({ item }) {
   );
 }
 
-NavGroup.propTypes = { item: PropTypes.object };
+NavGroup.propTypes = {
+  item: PropTypes.object,
+  setSelectedID: PropTypes.func,
+  selectedID: PropTypes.string
+};
