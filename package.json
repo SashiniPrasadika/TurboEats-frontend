@@ -4,7 +4,7 @@
   "homepage": "",
   "author": {
     "name": "sashini prasadika",
-    "email": "nasprasadika@gmail.com"    
+    "email": "nasprasadika@gmail.com"
   },
   "scripts": {
     "start": "vite",
@@ -27,6 +27,7 @@
     "@mui/system": "7.3.6",
     "@mui/x-charts": "8.22.1",
     "@vitejs/plugin-react": "5.1.2",
+    "axios": "^1.13.4",
     "formik": "2.4.9",
     "framer-motion": "12.23.26",
     "lodash-es": "4.17.22",

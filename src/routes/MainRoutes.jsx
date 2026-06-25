@@ -5,9 +5,10 @@ import Loadable from 'components/Loadable';
 import DashboardLayout from 'layout/Dashboard';
 
 // render- Dashboard
-const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')));
-// render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+const DashboardDefault = Loadable(lazy(() => import('../pages/dashboard/default')));
+
+// render - sample page  ✅ FIXED PATH HERE
+const SamplePage = Loadable(lazy(() => import('../pages/extra-pages/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 

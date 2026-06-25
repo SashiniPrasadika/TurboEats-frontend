@@ -6,7 +6,7 @@ import path from 'path';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const API_URL = env.VITE_APP_BASE_NAME || '/';
-  const PORT = 3000;
+  const PORT = env.PUBLIC_URL || 3005;
 
   return {
     base: API_URL,
