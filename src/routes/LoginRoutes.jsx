@@ -1,31 +1,14 @@
-import { lazy } from 'react';
-import Loadable from 'components/Loadable';
-// project imports
-//import Loadable from 'components/Loadable';
+// src/routes/LoginRoutes.jsx
+import { lazy, Suspense } from 'react';
+import AuthLayout from '../layout/Auth';
+const LoginPage = lazy(() => import('../pages/auth/Login'));
+const RegisterPage = lazy(() => import('../pages/auth/Register'));
 
-// jwt auth
-const LoginPage = Loadable(lazy(() => import('pages/auth/Login')));
-const RegisterPage = Loadable(lazy(() => import('pages/auth/Register')));
-
-// ==============================|| AUTH ROUTING ||============================== //
-
-const LoginRoutes = {
+export default {
   path: '/',
+  element: <AuthLayout />,
   children: [
-    {
-      path: '/',
-      children: [
-        {
-          path: '/login',
-          element: <LoginPage />
-        },
-        {
-          path: '/register',
-          element: <RegisterPage />
-        }
-      ]
-    }
-  ]
+    { path: 'login', element: <Suspense fallback={null}><LoginPage /></Suspense> },
+    { path: 'register', element: <Suspense fallback={null}><RegisterPage /></Suspense> },
+  ],
 };
-
-export default LoginRoutes;
